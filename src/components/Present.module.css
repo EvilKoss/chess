@@ -1,0 +1,17 @@
+.chess {
+	width: 110px;
+  	height: 110px;
+	display: inline;
+}
+
+.table {
+	left: 500px;
+	top: 25px;
+	position: absolute;
+}
+
+.pawn {
+	left: 1400px;
+	top: 25px;
+	position: absolute;
+}
