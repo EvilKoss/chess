@@ -86,8 +86,8 @@ const Reducer = (state = initialState,action) => {
 	}
 //------------------------------------------------------------------------------
 	const enemy = (y,x) => {
-		if(insideBoard(y,x) && newTable[y][x] <= 12 && newTable[y][x] >= 7){return true;}
-		else if(insideBoard(y,x) && newTable[y][x] > 0 && newTable[y][x] <= 6 && newTable[y][x] > 0){return true;}
+		if(insideBoard(y,x) && newTable[y][x] <= 12 && newTable[y][x] >= 7 && state.whoMoves % 2 == 1){return true;}
+		else if(insideBoard(y,x) && newTable[y][x] > 0 && newTable[y][x] <= 6 && state.whoMoves % 2 == 0){return true;}
 		else {return false;}
 
 	}
@@ -216,7 +216,7 @@ const Reducer = (state = initialState,action) => {
 						newBoard[oldY][oldX] = yellowSquare;
 					}else{
 						if(newTable[oldY][oldX] == whiteKing || newTable[oldY][oldX] == blackKing){
-							alert('da');
+							alert('2');
 						}
 					}
 				}
@@ -225,7 +225,8 @@ const Reducer = (state = initialState,action) => {
 						newBoard[oldY+y1][oldX+x1] = redSquare;
 					}else{
 						if(newTable[oldY+y1][oldX+x1] == whiteKing || newTable[oldY+y1][oldX+x1] == blackKing){
-							alert('da');
+							let new1 = newTable[oldY][oldX];
+							alert(new1);
 						}
 					}
 				}
@@ -297,7 +298,7 @@ const Reducer = (state = initialState,action) => {
 							newBoard[yyy][xxx] = yellowSquare;
 						}else{
 							if(newTable[yyy][xxx] == whiteKing || newTable[yyy][xxx] == blackKing){
-								alert('da');
+								alert('net');
 							}
 						}
 					}
@@ -306,7 +307,7 @@ const Reducer = (state = initialState,action) => {
 							newBoard[yyy][xxx] = redSquare;
 						}else{
 							if(newTable[yyy][xxx] == whiteKing || newTable[yyy][xxx] == blackKing){
-								alert('da');
+								alert('net');
 							}
 						}
 					}
@@ -399,7 +400,16 @@ const Reducer = (state = initialState,action) => {
 	const checkCheckKing = () => {
 		for(let i=0;i<newTable.length;i++){
 			for(let j=0;j<newTable.length;j++){
-				checkChoise(i,j,true);
+				if(state.whoMoves % 2 == 1){
+					if(newTable[i][j] > 0 && newTable[i][j] < 7){
+						checkChoise(i,j,true);
+					}
+				}
+				if(state.whoMoves % 2 == 0){
+					if(newTable[i][j] > 6 && newTable[i][j] < 13){
+						checkChoise(i,j,true);
+					}
+				}
 			}
 		}
 	}
